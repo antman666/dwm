@@ -25,6 +25,9 @@ dwm是一个非常轻便、快速的窗口管理器，基于X
 - [dwm-fullscreen-6.2.diff](https://dwm.suckless.org/patches/fullscreen/)
 - [dwm-hide-and-restore.diff](https://github.com/antman666/dwm/tree/master/patches/) (此插件为大佬[theniceboy](https://github.com/theniceboy/)所做)
 - [dwm-hide_vacant_tags-6.2.diff](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [dwm-noborder-6.2.diff](https://dwm.suckless.org/patches/noborder/)
+- [dwm-r1522-viewontag.diff](https://dwm.suckless.org/patches/viewontag/)
+- [dwm-rotatestack-20161021-ab9571b.diff](https://dwm.suckless.org/patches/rotatestack/)
 
 运行dwm
 -----------

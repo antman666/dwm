@@ -1,5 +1,3 @@
-#include <X11/XF86keysym.h>
-
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */

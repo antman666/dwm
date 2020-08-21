@@ -52,7 +52,7 @@ static const int resizehints		 = 1;    	 /* 1 means respect size hints in tiled 
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[ ]",       tile 	},    			 /* first entry is default */
+	{ "[ ]",      tile 	},    			 /* first entry is default */
 	{ "><>",      NULL 	},    			 /* no layout function means floating behavior */
 	{ "[M]",      monocle 	},
 };
@@ -74,6 +74,9 @@ static const char *dmenucmd[]		 = { "dmenu_run", "-m", dmenumon, "-fn", dmenufon
 static const char *termcmd[] 		 = { "st", NULL };
 static const char *browsercmd[] 	 = { "google-chrome-stable", NULL };
 static const char *musiccmd[]		 = { "netease-cloud-music", NULL };
+static const char *volup[]		 = { "/home/antman/Desktop/scripts/volup.sh", NULL };
+static const char *voldown[]		 = { "/home/antman/Desktop/scripts/voldown.sh", NULL };
+static const char *screenshotcmd[]	 = { "/home/antman/Desktop/scripts/screenshot.sh", NULL }; 
 
 static Key keys[] = {
 	/* modifier     	        key        function        argument */
@@ -81,6 +84,9 @@ static Key keys[] = {
 	{ MODKEY,			XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,			XK_n,	   spawn,	   {.v = browsercmd } },
 	{ MODKEY|ShiftMask,		XK_m,	   spawn,	   {.v = musiccmd } },
+	{ ControlMask,			XK_Up,	   spawn,	   {.v = volup } },
+	{ ControlMask,			XK_Down,   spawn,	   {.v = voldown } },
+	{ 0,				XK_Print,  spawn,	   {.v = screenshotcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      rotatestack,    {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,      rotatestack,    {.i = -1 } },

@@ -2,7 +2,7 @@ Ant Man's DWM
 ============================
 
 <!-- ![alatar](https://raw.githubusercontent.com/antman666/dwm/master/demo.png) -->
-![Alt demo.png](https://raw.githubusercontent.com/antman666/dwm/master/demo.png)
+![demo.png](https://raw.githubusercontent.com/antman666/dwm/master/demo.png)
 
 一些我自己使用的脚本会在[scripts](https://github.com/antman666/scripts)
 

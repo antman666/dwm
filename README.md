@@ -1,9 +1,10 @@
 Ant Man's DWM
 ============================
 
-![demo.png](https://raw.githubusercontent.com/antman666/dwm/master/demo.png)
+![demo.png](https://raw.githubusercontent.com/antman666/dwm/master/demo.png)[国内地址](https://gitee.com/antman666/dwm)
 
 一些我自己使用的脚本会在[scripts](https://github.com/antman666/scripts)([国内地址](https://gitee.com/antman666/scripts))
+
 一些我自己使用的壁纸会在[wallpaper](https://github.com/antman666/wallpaper)([国内地址](https://gitee.com/antman666/wallpaper))
 
 依赖

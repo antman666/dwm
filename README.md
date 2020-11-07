@@ -14,9 +14,9 @@ Ant Man's DWM
 
 安装
 ------------
-编辑`config.mk`等文件来完成一些本地化配置 (dwm会默认安装到/usr/local).
+编辑`config.h`等文件来完成一些本地化配置 ( dwm 会默认安装到 /usr/local).
 
-之后运行以下命令来安装编辑过的dwm到机器上(需要root权限):
+之后运行以下命令来安装编辑过的 dwm 到机器上(需要root权限):
 
 	make install clean
 
@@ -26,7 +26,7 @@ Ant Man's DWM
 - [dwm-autostart-20200610-cb3f58a.diff](https://dwm.suckless.org/patches/autostart/)
 - [dwm-awesomebar-20191003-80e2a76.diff](http://dwm.suckless.org/patches/awesomebar/)
 - [dwm-fullscreen-6.2.diff](https://dwm.suckless.org/patches/fullscreen/)
-- [dwm-hide-and-restore.diff](https://github.com/antman666/dwm/tree/master/patches/) (此插件为大佬[theniceboy](https://github.com/theniceboy/)所做)
+- [dwm-hide-and-restore.diff](https://github.com/antman666/dwm/tree/master/patches/) (此插件为[theniceboy](https://github.com/theniceboy/)所做)
 - [dwm-hide_vacant_tags-6.2.diff](https://dwm.suckless.org/patches/hide_vacant_tags/)
 - [dwm-noborder-6.2.diff](https://dwm.suckless.org/patches/noborder/)
 - [dwm-r1522-viewontag.diff](https://dwm.suckless.org/patches/viewontag/)

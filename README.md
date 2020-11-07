@@ -38,3 +38,4 @@ Ant Man's DWM
 
 	exec dwm
 
+更多信息请参考[手册](https://dwm.suckless.org/)。

@@ -46,7 +46,8 @@ static const Rule rules[] = {
      *	WM_CLASS(STRING) = instance, class
      *	WM_NAME(STRING)  = title
      */
-    /* class      		instance    title       tags mask     isfloating   monitor
+    /* class      		instance    title       tags mask     isfloating
+     * monitor
      */
     {"Gimp", NULL, NULL, 0, 1, -1},
 };
@@ -98,6 +99,7 @@ static Key keys[] = {
     {MODKEY, XK_d, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_n, spawn, {.v = browsercmd}},
+    {MODKEY | ShiftMask, XK_m, spawn, {.v = musiccmd}},
     {ControlMask, XK_Up, spawn, {.v = volup}},
     {ControlMask, XK_Down, spawn, {.v = voldown}},
     {0, XK_Print, spawn, {.v = screenshotcmd}},

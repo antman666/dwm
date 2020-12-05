@@ -95,7 +95,7 @@ static const char *screenshotcmd[] = {
     "/home/antman/Desktop/scripts/screenshot.sh", NULL};
 
 static Key keys[] = {
-    /* modifier     	        key        function        argument */
+    /* modifier     	        key        	function        argument */
     {MODKEY, XK_d, spawn, {.v = dmenucmd}},
     {MODKEY, XK_Return, spawn, {.v = termcmd}},
     {MODKEY, XK_n, spawn, {.v = browsercmd}},
@@ -138,8 +138,8 @@ static Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle,
  * ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
-    /* click                event mask      button          function argument
-     */
+    /* click               	event mask      button          function
+       argument*/
     {ClkLtSymbol, 0, Button1, setlayout, {0}},
     {ClkLtSymbol, 0, Button3, setlayout, {.v = &layouts[2]}},
     {ClkWinTitle, 0, Button1, togglewin, {0}},

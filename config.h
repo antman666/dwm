@@ -1,5 +1,3 @@
-/* See LICENSE file for copyright and license details. */
-
 /* appearance */
 static const unsigned int borderpx = 2; /* border pixel of windows */
 static const unsigned int snap = 32;    /* snap pixel */
@@ -13,9 +11,9 @@ display systray on the last monitor*/
 static const int showsystray = 1; /* 0 means no systray */
 static const int smartgaps =
     0; /* 1 means no outer gap when there is only one window */
-static const int showbar = 1;       /* 0 means no bar */
-static const int topbar = 0;        /* 0 means bottom bar */
-static const Bool viewontag = True; /* Switch view on tag switch */
+static const int showbar = 1;   /* 0 means no bar */
+static const int topbar = 0;    /* 0 means bottom bar */
+static const int viewontag = 1; /* Switch view on tag switch */
 static const char *fonts[] = {"SauceCodePro Nerd Font Mono:size=15"};
 static const char dmenufont[] = "SauceCodePro Nerd Font Mono:size=15";
 static const char col_gray1[] = "#222222";

@@ -88,6 +88,7 @@ static const char *musiccmd[] = {"iease-music", NULL};
 static const char *volup[] = {"/home/antman/Desktop/scripts/volup.sh", NULL};
 static const char *voldown[] = {"/home/antman/Desktop/scripts/voldown.sh",
                                 NULL};
+static const char *screenlock[] = {"slock", NULL};
 static const char *screenshotcmd[] = {
     "/home/antman/Desktop/scripts/screenshot.sh", NULL};
 
@@ -113,6 +114,7 @@ static Key keys[] = {
     {MODKEY | ShiftMask, XK_z, restorewin, {0}},
     {MODKEY | ShiftMask, XK_Return, zoom, {0}},
     {MODKEY, XK_Tab, view, {0}},
+    {MODKEY, XK_a, spawn, {.v = screenlock}},
     {MODKEY | ShiftMask, XK_q, killclient, {0}},
     {MODKEY, XK_t, setlayout, {.v = &layouts[0]}},
     {MODKEY, XK_f, setlayout, {.v = &layouts[1]}},

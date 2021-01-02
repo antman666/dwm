@@ -3,12 +3,11 @@ static const unsigned int borderpx = 2; /* border pixel of windows */
 static const unsigned int snap = 32;    /* snap pixel */
 static const unsigned int systraypinning =
     0; /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor
-X */
+          X */
 static const unsigned int systrayspacing = 2; /* systray spacing */
-static const int systraypinningfailfirst =
-    1; /* 1: if pinning fails, display systray on the first monitor, False:
-display systray on the last monitor*/
-static const int showsystray = 1; /* 0 means no systray */
+static const int systraypinningfailfirst = 1; /* 1: if pinning fails, display
+systray on the first monitor, False: display systray on the last monitor*/
+static const int showsystray = 1;             /* 0 means no systray */
 static const int smartgaps =
     0; /* 1 means no outer gap when there is only one window */
 static const int showbar = 1;   /* 0 means no bar */
@@ -85,7 +84,7 @@ static const char *dmenucmd[] = {
     "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
 static const char *termcmd[] = {"st", NULL};
 static const char *browsercmd[] = {"google-chrome-stable", NULL};
-static const char *musiccmd[] = {"electron-netease-cloud-music", NULL};
+static const char *musiccmd[] = {"iease-music", NULL};
 static const char *volup[] = {"/home/antman/Desktop/scripts/volup.sh", NULL};
 static const char *voldown[] = {"/home/antman/Desktop/scripts/voldown.sh",
                                 NULL};

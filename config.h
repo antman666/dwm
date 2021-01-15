@@ -84,7 +84,7 @@ static const char *dmenucmd[] = {
     "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
 static const char *termcmd[] = {"st", NULL};
 static const char *browsercmd[] = {"google-chrome-stable", NULL};
-static const char *musiccmd[] = {"iease-music", NULL};
+static const char *musiccmd[] = {"electron-netease-cloud-music", NULL};
 static const char *volup[] = {"/home/antman/Desktop/scripts/volup.sh", NULL};
 static const char *voldown[] = {"/home/antman/Desktop/scripts/voldown.sh",
                                 NULL};

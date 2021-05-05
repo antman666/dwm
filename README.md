@@ -9,28 +9,29 @@ Ant Man's DWM
 
 依赖
 ------------
-安装dwm你需要Xlib等一些头文件(xorg)
+安装dwm你需要Xlib等一些头文件(xorg-apps and xorg-server)
 
 
 安装
 ------------
-编辑`config.h`等文件来完成一些本地化配置 ( dwm 会默认安装到 /usr/local).
+编辑`config.h`等文件来完成一些本地化配置 ( dwm 会默认安装到 /usr/local/bin).
 
-之后运行以下命令来安装编辑过的 dwm 到机器上(需要root权限):
+之后运行以下命令来安装编辑过的 dwm 到机器上:
 
-	make install clean
+	sudo make install clean
 
 用到的一些插件
 ---------------
-- [dwm-alpha-20180613-b69c870.diff](https://dwm.suckless.org/patches/alpha/)
-- [dwm-autostart-20200610-cb3f58a.diff](https://dwm.suckless.org/patches/autostart/)
-- [dwm-awesomebar-20191003-80e2a76.diff](http://dwm.suckless.org/patches/awesomebar/)
-- [dwm-fullscreen-6.2.diff](https://dwm.suckless.org/patches/fullscreen/)
-- [dwm-hide-and-restore.diff](https://github.com/antman666/dwm/tree/master/patches/) (此插件为[theniceboy](https://github.com/theniceboy/)所做)
-- [dwm-hide_vacant_tags-6.2.diff](https://dwm.suckless.org/patches/hide_vacant_tags/)
-- [dwm-noborder-6.2.diff](https://dwm.suckless.org/patches/noborder/)
-- [dwm-r1522-viewontag.diff](https://dwm.suckless.org/patches/viewontag/)
-- [dwm-rotatestack-20161021-ab9571b.diff](https://dwm.suckless.org/patches/rotatestack/)
+- [dwm-alpha](https://dwm.suckless.org/patches/alpha/)
+- [dwm-autostart](https://dwm.suckless.org/patches/autostart/)
+- [dwm-awesomebar](http://dwm.suckless.org/patches/awesomebar/)
+- [dwm-fullscreen](https://dwm.suckless.org/patches/fullscreen/)
+- [dwm-hide-and-restore](https://github.com/antman666/dwm/tree/master/patches/) (此插件为[theniceboy](https://github.com/theniceboy/)所做)
+- [dwm-hide_vacant_tags](https://dwm.suckless.org/patches/hide_vacant_tags/)
+- [dwm-noborder](https://dwm.suckless.org/patches/noborder/)
+- [dwm-r1522-viewontag](https://dwm.suckless.org/patches/viewontag/)
+- [dwm-rotatestack](https://dwm.suckless.org/patches/rotatestack/)
+- [dwm-systray](https://dwm.suckless.org/patches/systray/)
 
 运行dwm
 -----------

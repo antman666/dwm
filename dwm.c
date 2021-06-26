@@ -1705,7 +1705,7 @@ void run(void) {
       handler[ev.type](&ev); /* call handler */
 }
 
-void runAutostart(void) { system("cd ~/Desktop/scripts; ./autostart.sh &"); }
+void runAutostart(void) { system("cd $SCRIPTS_PATH; ./autostart.sh &"); }
 
 void scan(void) {
   unsigned int i, num;

@@ -34,6 +34,7 @@ Ant Man's DWM
 - [dwm-r1522-viewontag](https://dwm.suckless.org/patches/viewontag/)
 - [dwm-rotatestack](https://dwm.suckless.org/patches/rotatestack/)
 - [dwm-systray](https://dwm.suckless.org/patches/systray/)
+- [dwm-alwayscenter](https://dwm.suckless.org/patches/alwayscenter/)
 
 运行dwm
 -----------

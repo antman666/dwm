@@ -23,7 +23,9 @@ static const char col_cyan[] = "#37474F";
 static const char col_border[] = "#42A5F5";
 static const unsigned int baralpha = 0xd0;
 static const unsigned int borderalpha = OPAQUE;
-static const char musicplayer[] = "yesplaymusic";
+static const char music_player[] = "yesplaymusic";
+static const char default_browser[] = "google-chrome-stable";
+static const char default_screen_lock[] = "slock";
 static const char *colors[][3] = {
     /*               fg         bg         border   */
     [SchemeNorm] = {col_gray3, col_gray1, col_gray2},
@@ -84,12 +86,12 @@ static const char *dmenucmd[] = {
     "dmenu_run", "-m",      dmenumon, "-fn",    dmenufont, "-nb",     col_gray1,
     "-nf",       col_gray3, "-sb",    col_cyan, "-sf",     col_gray4, NULL};
 static const char *termcmd[] = {"st", NULL};
-static const char *browsercmd[] = {"google-chrome-stable", NULL};
-static const char *musiccmd[] = {musicplayer, NULL};
+static const char *browsercmd[] = {default_browser, NULL};
+static const char *musiccmd[] = {music_player, NULL};
+static const char *screenlock[] = {default_screen_lock, NULL};
 static const char *volup[] = {"/home/antman/Desktop/scripts/volup.sh", NULL};
 static const char *voldown[] = {"/home/antman/Desktop/scripts/voldown.sh",
                                 NULL};
-static const char *screenlock[] = {"slock", NULL};
 static const char *screenshotcmd[] = {
     "/home/antman/Desktop/scripts/screenshot.sh", NULL};
 

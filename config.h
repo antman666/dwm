@@ -92,8 +92,9 @@ static const char *screenlock[] = {default_screen_lock, NULL};
 static const char *volup[] = {"/home/antman/Desktop/scripts/volup.sh", NULL};
 static const char *voldown[] = {"/home/antman/Desktop/scripts/voldown.sh",
                                 NULL};
-static const char *screenshotcmd[] = {
-    "/home/antman/Desktop/scripts/screenshot.sh", NULL};
+static const char *screenshotcmd[] = {"scrot", "-bq", "100", "screenshot.png"};
+static const char *screenshotchoosecmd[] = {"scrot", "-sq", "100",
+                                            "screenget.png"};
 
 static Key keys[] = {
     /* modifier     	        key        	function        argument */
@@ -104,6 +105,7 @@ static Key keys[] = {
     {ControlMask, XK_Up, spawn, {.v = volup}},
     {ControlMask, XK_Down, spawn, {.v = voldown}},
     {0, XK_Print, spawn, {.v = screenshotcmd}},
+    {MODKEY, XK_Print, spawn, {.v = screenshotchoosecmd}},
     {MODKEY, XK_b, togglebar, {0}},
     {MODKEY | ShiftMask, XK_j, rotatestack, {.i = +1}},
     {MODKEY | ShiftMask, XK_k, rotatestack, {.i = -1}},

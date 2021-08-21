@@ -11,10 +11,10 @@
 #define UTF_INVALID 0xFFFD
 #define UTF_SIZ     4
 
-static const unsigned char utfbyte[UTF_SIZ + 1] = {0x80,    0, 0xC0, 0xE0, 0xF0};
-static const unsigned char utfmask[UTF_SIZ + 1] = {0xC0, 0x80, 0xE0, 0xF0, 0xF8};
-static const long utfmin[UTF_SIZ + 1] = {       0,    0,  0x80,  0x800,  0x10000};
-static const long utfmax[UTF_SIZ + 1] = {0x10FFFF, 0x7F, 0x7FF, 0xFFFF, 0x10FFFF};
+static const unsigned char utfbyte[UTF_SIZ + 1] = {0x80, 0,    0xC0, 0xE0,  0xF0};
+static const unsigned char utfmask[UTF_SIZ + 1] = {0xC0, 0x80, 0xE0, 0xF0,  0xF8};
+static const long utfmin[UTF_SIZ + 1]           = {0,    0,    0x80, 0x800, 0x10000};
+static const long utfmax[UTF_SIZ + 1]           = {0x10FFFF,   0x7F, 0x7FF, 0xFFFF, 0x10FFFF};
 
 static long
 utf8decodebyte(const char c, size_t *i)
@@ -30,8 +30,7 @@ utf8validate(long *u, size_t i)
 {
     if (!BETWEEN(*u, utfmin[i], utfmax[i]) || BETWEEN(*u, 0xD800, 0xDFFF))
         *u = UTF_INVALID;
-    for (i = 1; *u > utfmax[i]; ++i)
-        ;
+    for (i = 1; *u > utfmax[i]; ++i);
     return i;
 }
 
@@ -63,18 +62,18 @@ utf8decode(const char *c, long *u, size_t clen)
 Drw *
 drw_create(Display *dpy, int screen, Window root, unsigned int w, unsigned int h, Visual *visual, unsigned int depth, Colormap cmap)
 {
-    Drw *drw = ecalloc(1, sizeof(Drw));
+    Drw *drw      = ecalloc(1, sizeof(Drw));
 
-    drw->dpy = dpy;
-    drw->screen = screen;
-    drw->root = root;
-    drw->w = w;
-    drw->h = h;
-    drw->visual = visual;
-    drw->depth = depth;
-    drw->cmap = cmap;
+    drw->dpy      = dpy;
+    drw->screen   = screen;
+    drw->root     = root;
+    drw->w        = w;
+    drw->h        = h;
+    drw->visual   = visual;
+    drw->depth    = depth;
+    drw->cmap     = cmap;
     drw->drawable = XCreatePixmap(dpy, root, w, h, depth);
-    drw->gc = XCreateGC(dpy, drw->drawable, 0, NULL);
+    drw->gc       = XCreateGC(dpy, drw->drawable, 0, NULL);
     XSetLineAttributes(dpy, drw->gc, 1, LineSolid, CapButt, JoinMiter);
 
     return drw;
@@ -108,7 +107,7 @@ static Fnt *
 xfont_create(Drw *drw, const char *fontname, FcPattern *fontpattern)
 {
     Fnt *font;
-    XftFont *xfont = NULL;
+    XftFont *xfont     = NULL;
     FcPattern *pattern = NULL;
 
     if (fontname) {
@@ -148,11 +147,11 @@ xfont_create(Drw *drw, const char *fontname, FcPattern *fontpattern)
         return NULL;
     }
 
-    font = ecalloc(1, sizeof(Fnt));
-    font->xfont = xfont;
+    font          = ecalloc(1, sizeof(Fnt));
+    font->xfont   = xfont;
     font->pattern = pattern;
-    font->h = xfont->ascent + xfont->descent;
-    font->dpy = drw->dpy;
+    font->h       = xfont->ascent + xfont->descent;
+    font->dpy     = drw->dpy;
 
     return font;
 }
@@ -180,7 +179,7 @@ drw_fontset_create(Drw* drw, const char *fonts[], size_t fontcount)
     for (i = 1; i <= fontcount; i++) {
         if ((cur = xfont_create(drw, fonts[fontcount - i], NULL))) {
             cur->next = ret;
-            ret = cur;
+            ret       = cur;
         }
     }
     return (drw->fonts = ret);
@@ -201,8 +200,7 @@ drw_clr_create(Drw *drw, Clr *dest, const char *clrname, unsigned int alpha)
     if (!drw || !dest || !clrname)
         return;
 
-    if (!XftColorAllocName(drw->dpy, drw->visual, drw->cmap,
-                           clrname, dest))
+    if (!XftColorAllocName(drw->dpy, drw->visual, drw->cmap, clrname, dest))
         die("error, cannot allocate color '%s'", clrname);
 
     dest->pixel = (dest->pixel & 0x00ffffffU) | (alpha << 24);
@@ -285,8 +283,8 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
     usedfont = drw->fonts;
     while (1) {
         utf8strlen = 0;
-        utf8str = text;
-        nextfont = NULL;
+        utf8str    = text;
+        nextfont   = NULL;
         while (*text) {
             utf8charlen = utf8decode(text, &utf8codepoint, UTF_SIZ);
             for (curfont = drw->fonts; curfont; curfont = curfont->next) {
@@ -318,13 +316,11 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
                 memcpy(buf, utf8str, len);
                 buf[len] = '\0';
                 if (len < utf8strlen)
-                    for (i = len; i && i > len - 3; buf[--i] = '.')
-                        ; /* NOP */
+                    for (i = len; i && i > len - 3; buf[--i] = '.'); /* NOP */
 
                 if (render) {
                     ty = y + (h - usedfont->h) / 2 + usedfont->xfont->ascent;
-                    XftDrawStringUtf8(d, &drw->scheme[invert ? ColBg : ColFg],
-                                      usedfont->xfont, x, ty, (XftChar8 *)buf, len);
+                    XftDrawStringUtf8(d, &drw->scheme[invert ? ColBg : ColFg], usedfont->xfont, x, ty, (XftChar8 *)buf, len);
                 }
                 x += ew;
                 w -= ew;
@@ -364,8 +360,7 @@ drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lp
             if (match) {
                 usedfont = xfont_create(drw, NULL, match);
                 if (usedfont && XftCharExists(drw->dpy, usedfont->xfont, utf8codepoint)) {
-                    for (curfont = drw->fonts; curfont->next; curfont = curfont->next)
-                        ; /* NOP */
+                    for (curfont = drw->fonts; curfont->next; curfont = curfont->next); /* NOP */
                     curfont->next = usedfont;
                 } else {
                     xfont_free(usedfont);

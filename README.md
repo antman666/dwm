@@ -12,6 +12,8 @@
 
 安装 dwm 你需要 xorg-apps and xorg-server
 
+同时你还需要其他的一些东西, 比如 jemalloc
+
 ## 安装
 
 编辑`config.h`等文件来完成一些本地化配置.

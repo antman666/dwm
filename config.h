@@ -85,7 +85,7 @@ static const char *screenlock[]          = {default_screen_lock, NULL};
 static const char *volup[]               = {"/home/antman/Desktop/scripts/volup.sh", NULL};
 static const char *voldown[]             = {"/home/antman/Desktop/scripts/voldown.sh",NULL};
 static const char *screenshotcmd[]       = {"scrot", "-bq", "100", "screenshot.png"};
-static const char *screenshotchoosecmd[] = {"scrot", "-sq", "100","screenget.png"};
+static const char *screenshotchoosecmd[] = {"scrot", "-s", "screenget.png"};
 
 static Key keys[] = {
     /* modifier              key        	function        argument */

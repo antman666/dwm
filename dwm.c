@@ -1659,14 +1659,18 @@ void scan(void) {
 
     if (XQueryTree(dpy, root, &d1, &d2, &wins, &num)) {
         for (i = 0; i < num; i++) {
-            if (!XGetWindowAttributes(dpy, wins[i], &wa) || wa.override_redirect || XGetTransientForHint(dpy, wins[i], &d1))
+            if (!XGetWindowAttributes(dpy, wins[i], &wa)
+                    || wa.override_redirect || XGetTransientForHint(dpy, wins[i], &d1))
                 continue;
-            if (wa.map_state == IsViewable || getstate(wins[i]) == IconicState) manage(wins[i], &wa);
+            if (wa.map_state == IsViewable || getstate(wins[i]) == IconicState)
+                manage(wins[i], &wa);
         }
         for (i = 0; i < num; i++) { /* now the transients */
             if (!XGetWindowAttributes(dpy, wins[i], &wa))
                 continue;
-            if (XGetTransientForHint(dpy, wins[i], &d1) && (wa.map_state == IsViewable || getstate(wins[i]) == IconicState)) manage(wins[i], &wa);
+            if (XGetTransientForHint(dpy, wins[i], &d1)
+                    && (wa.map_state == IsViewable || getstate(wins[i]) == IconicState))
+                manage(wins[i], &wa);
         }
         if (wins)
             XFree(wins);
@@ -1834,31 +1838,31 @@ void setup(void) {
     bh    = drw->fonts->h + 2;
     updategeom();
     /* init atoms */
-    utf8string                            = XInternAtom(dpy, "UTF8_STRING", False);
-    wmatom[WMProtocols]                   = XInternAtom(dpy, "WM_PROTOCOLS", False);
-    wmatom[WMDelete]                      = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
-    wmatom[WMState]                       = XInternAtom(dpy, "WM_STATE", False);
-    wmatom[WMTakeFocus]                   = XInternAtom(dpy, "WM_TAKE_FOCUS", False);
-    netatom[NetActiveWindow]              = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
-    netatom[NetSupported]                 = XInternAtom(dpy, "_NET_SUPPORTED", False);
-    netatom[NetSystemTray]                = XInternAtom(dpy, "_NET_SYSTEM_TRAY_S0", False);
-    netatom[NetSystemTrayOP]              = XInternAtom(dpy, "_NET_SYSTEM_TRAY_OPCODE", False);
-    netatom[NetSystemTrayOrientation]     = XInternAtom(dpy, "_NET_SYSTEM_TRAY_ORIENTATION", False);
+    utf8string          = XInternAtom(dpy, "UTF8_STRING", False);
+    wmatom[WMProtocols] = XInternAtom(dpy, "WM_PROTOCOLS", False);
+    wmatom[WMDelete]    = XInternAtom(dpy, "WM_DELETE_WINDOW", False);
+    wmatom[WMState]     = XInternAtom(dpy, "WM_STATE", False);
+    wmatom[WMTakeFocus] = XInternAtom(dpy, "WM_TAKE_FOCUS", False);
+    netatom[NetActiveWindow] = XInternAtom(dpy, "_NET_ACTIVE_WINDOW", False);
+    netatom[NetSupported]    = XInternAtom(dpy, "_NET_SUPPORTED", False);
+    netatom[NetSystemTray]   = XInternAtom(dpy, "_NET_SYSTEM_TRAY_S0", False);
+    netatom[NetSystemTrayOP] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_OPCODE", False);
+    netatom[NetSystemTrayOrientation] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_ORIENTATION", False);
     netatom[NetSystemTrayOrientationHorz] = XInternAtom(dpy, "_NET_SYSTEM_TRAY_ORIENTATION_HORZ", False);
-    netatom[NetWMName]                    = XInternAtom(dpy, "_NET_WM_NAME", False);
-    netatom[NetWMState]                   = XInternAtom(dpy, "_NET_WM_STATE", False);
-    netatom[NetWMCheck]                   = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
-    netatom[NetWMFullscreen]              = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
-    netatom[NetWMWindowType]              = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
-    netatom[NetWMWindowTypeDialog]        = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
-    netatom[NetClientList]                = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
-    xatom[Manager]                        = XInternAtom(dpy, "MANAGER", False);
-    xatom[Xembed]                         = XInternAtom(dpy, "_XEMBED", False);
-    xatom[XembedInfo]                     = XInternAtom(dpy, "_XEMBED_INFO", False);
+    netatom[NetWMName]  = XInternAtom(dpy, "_NET_WM_NAME", False);
+    netatom[NetWMState] = XInternAtom(dpy, "_NET_WM_STATE", False);
+    netatom[NetWMCheck] = XInternAtom(dpy, "_NET_SUPPORTING_WM_CHECK", False);
+    netatom[NetWMFullscreen] = XInternAtom(dpy, "_NET_WM_STATE_FULLSCREEN", False);
+    netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
+    netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
+    netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+    xatom[Manager]    = XInternAtom(dpy, "MANAGER", False);
+    xatom[Xembed]     = XInternAtom(dpy, "_XEMBED", False);
+    xatom[XembedInfo] = XInternAtom(dpy, "_XEMBED_INFO", False);
     /* init cursors */
-    cursor[CurNormal]                     = drw_cur_create(drw, XC_left_ptr);
-    cursor[CurResize]                     = drw_cur_create(drw, XC_sizing);
-    cursor[CurMove]                       = drw_cur_create(drw, XC_fleur);
+    cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
+    cursor[CurResize] = drw_cur_create(drw, XC_sizing);
+    cursor[CurMove]   = drw_cur_create(drw, XC_fleur);
     /* init appearance */
     scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
     for (i = 0; i < LENGTH(colors); i++)
@@ -1870,15 +1874,21 @@ void setup(void) {
     updatestatus();
     /* supporting window for NetWMCheck */
     wmcheckwin = XCreateSimpleWindow(dpy, root, 0, 0, 1, 1, 0, 0, 0);
-    XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32, PropModeReplace, (unsigned char *)&wmcheckwin, 1);
-    XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8, PropModeReplace, (unsigned char *)"dwm", 3);
-    XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32, PropModeReplace, (unsigned char *)&wmcheckwin, 1);
+    XChangeProperty(dpy, wmcheckwin, netatom[NetWMCheck], XA_WINDOW, 32,
+                    PropModeReplace, (unsigned char *)&wmcheckwin, 1);
+    XChangeProperty(dpy, wmcheckwin, netatom[NetWMName], utf8string, 8,
+                    PropModeReplace, (unsigned char *)"dwm", 3);
+    XChangeProperty(dpy, root, netatom[NetWMCheck], XA_WINDOW, 32,
+                    PropModeReplace, (unsigned char *)&wmcheckwin, 1);
     /* EWMH support per view */
-    XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32, PropModeReplace, (unsigned char *)netatom, NetLast);
+    XChangeProperty(dpy, root, netatom[NetSupported], XA_ATOM, 32,
+                    PropModeReplace, (unsigned char *)netatom, NetLast);
     XDeleteProperty(dpy, root, netatom[NetClientList]);
     /* select events */
     wa.cursor = cursor[CurNormal]->cursor;
-    wa.event_mask = SubstructureRedirectMask | SubstructureNotifyMask | ButtonPressMask | PointerMotionMask | EnterWindowMask | LeaveWindowMask | StructureNotifyMask | PropertyChangeMask;
+    wa.event_mask = SubstructureRedirectMask | SubstructureNotifyMask
+                    | ButtonPressMask | PointerMotionMask | EnterWindowMask
+                    | LeaveWindowMask | StructureNotifyMask | PropertyChangeMask;
     XChangeWindowAttributes(dpy, root, CWEventMask | CWCursor, &wa);
     XSelectInput(dpy, root, wa.event_mask);
     grabkeys();
@@ -2276,7 +2286,7 @@ int updategeom(void) {
         int i, j, n, nn;
         Client *c;
         Monitor *m;
-        XineramaScreenInfo *info = XineramaQueryScreens(dpy, &nn);
+        XineramaScreenInfo *info   = XineramaQueryScreens(dpy, &nn);
         XineramaScreenInfo *unique = NULL;
 
         for (n = 0, m = mons; m; m = m->next, n++);
@@ -2296,7 +2306,9 @@ int updategeom(void) {
                     mons = createmon();
             }
             for (i = 0, m = mons; i < nn && m; m = m->next, i++)
-                if (i >= n || unique[i].x_org != m->mx || unique[i].y_org != m->my || unique[i].width != m->mw || unique[i].height != m->mh) {
+                if (i >= n
+                        || unique[i].x_org != m->mx || unique[i].y_org != m->my
+                        || unique[i].width != m->mw || unique[i].height != m->mh) {
                     dirty  = 1;
                     m->num = i;
                     m->mx  = m->wx = unique[i].x_org;
@@ -2637,15 +2649,15 @@ Monitor *wintomon(Window w) {
  * ignored (especially on UnmapNotify's). Other types of errors call Xlibs
  * default error handler, which may call exit. */
 int xerror(Display *dpy, XErrorEvent *ee) {
-    if (ee->error_code == BadWindow ||
-            (ee->request_code == X_SetInputFocus && ee->error_code == BadMatch) ||
-            (ee->request_code == X_PolyText8 && ee->error_code == BadDrawable) ||
-            (ee->request_code == X_PolyFillRectangle && ee->error_code == BadDrawable) ||
-            (ee->request_code == X_PolySegment && ee->error_code == BadDrawable) ||
-            (ee->request_code == X_ConfigureWindow && ee->error_code == BadMatch) ||
-            (ee->request_code == X_GrabButton && ee->error_code == BadAccess) ||
-            (ee->request_code == X_GrabKey && ee->error_code == BadAccess) ||
-            (ee->request_code == X_CopyArea && ee->error_code == BadDrawable))
+    if (ee->error_code == BadWindow
+            || (ee->request_code == X_SetInputFocus && ee->error_code == BadMatch)
+            || (ee->request_code == X_PolyText8 && ee->error_code == BadDrawable)
+            || (ee->request_code == X_PolyFillRectangle && ee->error_code == BadDrawable)
+            || (ee->request_code == X_PolySegment && ee->error_code == BadDrawable)
+            || (ee->request_code == X_ConfigureWindow && ee->error_code == BadMatch)
+            || (ee->request_code == X_GrabButton && ee->error_code == BadAccess)
+            || (ee->request_code == X_GrabKey && ee->error_code == BadAccess)
+            || (ee->request_code == X_CopyArea && ee->error_code == BadDrawable))
         return 0;
     fprintf(stderr, "dwm: fatal error: request code=%d, error code=%d\n", ee->request_code, ee->error_code);
     return xerrorxlib(dpy, ee); /* may call exit */
@@ -2711,8 +2723,8 @@ void xinitvisual() {
 void zoom(const Arg *arg) {
     Client *c = selmon->sel;
 
-    if (!selmon->lt[selmon->sellt]->arrange ||
-            (selmon->sel && selmon->sel->isfloating))
+    if (!selmon->lt[selmon->sellt]->arrange
+            || (selmon->sel && selmon->sel->isfloating))
         return;
     if (c == nexttiled(selmon->clients))
         if (!c || !(c = nexttiled(c->next)))

@@ -9,6 +9,7 @@ static const int smartgaps               = 0; 	/* 1 means no outer gap when ther
 static const int showbar                 = 1;   /* 0 means no bar */
 static const int topbar                  = 0;   /* 0 means bottom bar */
 static const int viewontag               = 1; 	/* Switch view on tag switch */
+static const int lockfullscreen          = 0;   /* 1 will force focus on the fullscreen window */
 static const char *fonts[]               = {"SauceCodePro Nerd Font Mono:size=15"};
 static const char dmenufont[]            = "SauceCodePro Nerd Font Mono:size=15";
 static const char col_gray1[]            = "#222222";

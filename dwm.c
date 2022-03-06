@@ -544,7 +544,7 @@ void buttonpress(XEvent *e) {
             arg.ui = 1 << i;
         } else if (ev->x < x + blw)
             click = ClkLtSymbol;
-        else if (ev->x > selmon->ww - TEXTW(stext) - getsystraywidth() + lrpad - 2)
+        else if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth() + lrpad - 2)
             click = ClkStatusText;
         else {
             x += blw;
@@ -1035,7 +1035,7 @@ void focusstack(const Arg *arg) {
         return;
     }
 
-    if (!selmon->sel)
+    if (!selmon->sel || (selmon->sel->isfullscreen && lockfullscreen))
         return;
     if (arg->i > 0) {
         for (c = selmon->sel->next; c && (!ISVISIBLE(c) || HIDDEN(c)); c = c->next);

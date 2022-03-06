@@ -26,7 +26,7 @@ LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender
 
 # flags
 CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Ofast ${INCS} ${CPPFLAGS} -march=native -fomit-frame-pointer -fno-common -flto
+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Ofast ${INCS} ${CPPFLAGS} -march=native -fomit-frame-pointer -fno-common -flto -B/usr/bin/mold
 LDFLAGS  = ${LIBS} -Wl,-Ofast,--sort-common,--as-needed,--strip-all,--hash-style=gnu,-ljemalloc
 
 # Solaris

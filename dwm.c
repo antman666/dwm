@@ -249,7 +249,7 @@ static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void movemouse(const Arg *arg);
 static Client *nexttiled(Client *c);
-static void pop(Client *);
+static void pop(Client *c);
 static void propertynotify(XEvent *e);
 static void quit(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
@@ -283,7 +283,7 @@ static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void tagtoleft(const Arg *arg);
 static void tagtoright(const Arg *arg);
-static void tile(Monitor *);
+static void tile(Monitor *m);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
@@ -610,7 +610,7 @@ void cleanup(void) {
         drw_cur_free(drw, cursor[i]);
     for (i = 0; i < LENGTH(colors); i++)
         free(scheme[i]);
-	free(scheme);
+    free(scheme);
     XDestroyWindow(dpy, wmcheckwin);
     drw_free(drw);
     XSync(dpy, False);
@@ -1123,14 +1123,11 @@ int gettextprop(Window w, Atom atom, char *text, unsigned int size) {
     text[0] = '\0';
     if (!XGetTextProperty(dpy, w, &name, atom) || !name.nitems)
         return 0;
-    if (name.encoding == XA_STRING)
+    if (name.encoding == XA_STRING) {
         strncpy(text, (char *)name.value, size - 1);
-    else {
-        if (XmbTextPropertyToTextList(dpy, &name, &list, &n) >= Success && n > 0 &&
-                *list) {
-            strncpy(text, *list, size - 1);
-            XFreeStringList(list);
-        }
+    } else if (XmbTextPropertyToTextList(dpy, &name, &list, &n) >= Success && n > 0 && *list) {
+        strncpy(text, *list, size - 1);
+        XFreeStringList(list);
     }
     text[size - 1] = '\0';
     XFree(name.value);
@@ -1274,7 +1271,7 @@ void manage(Window w, XWindowAttributes *wa) {
     XSetWindowBorder(dpy, w, scheme[SchemeNorm][ColBorder].pixel);
     configure(c); /* propagates border_width, if size doesn't change */
     updatewindowtype(c);
-	updatesizehints(c);
+    updatesizehints(c);
     updatewmhints(c);
     c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
     c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
@@ -1951,9 +1948,7 @@ void spawn(const Arg *arg) {
             close(ConnectionNumber(dpy));
         setsid();
         execvp(((char **)arg->v)[0], (char **)arg->v);
-        fprintf(stderr, "dwm: execvp %s", ((char **)arg->v)[0]);
-        perror(" failed");
-        exit(EXIT_SUCCESS);
+        die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
     }
 }
 
@@ -2208,6 +2203,7 @@ void unmanage(Client *c, int destroyed) {
         wc.border_width = c->oldbw;
         XGrabServer(dpy); /* avoid race conditions */
         XSetErrorHandler(xerrordummy);
+        XSelectInput(dpy, c->win, NoEventMask);
         XConfigureWindow(dpy, c->win, CWBorderWidth, &wc); /* restore border */
         XUngrabButton(dpy, AnyButton, AnyModifier, c->win);
         setclientstate(c, WithdrawnState);
@@ -2730,12 +2726,10 @@ void xinitvisual() {
 void zoom(const Arg *arg) {
     Client *c = selmon->sel;
 
-    if (!selmon->lt[selmon->sellt]->arrange
-            || (selmon->sel && selmon->sel->isfloating))
+    if (!selmon->lt[selmon->sellt]->arrange || (selmon->sel && selmon->sel->isfloating))
         return;
-    if (c == nexttiled(selmon->clients))
-        if (!c || !(c = nexttiled(c->next)))
-            return;
+    if (c == nexttiled(selmon->clients) && !(c = nexttiled(c->next)))
+        return;
     pop(c);
 }
 

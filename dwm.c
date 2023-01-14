@@ -328,7 +328,7 @@ static const char broken[] = "broken";
 static char stext[256];
 static int screen;
 static int sw, sh;      /* X display screen geometry width, height */
-static int bh, blw = 0; /* bar geometry */
+static int bh, blw = 0; /* bar height */
 static int lrpad;       /* sum of left and right padding for text */
 static int (*xerrorxlib)(Display *, XErrorEvent *);
 static unsigned int numlockmask = 0;
@@ -544,7 +544,7 @@ void buttonpress(XEvent *e) {
         if (i < LENGTH(tags)) {
             click  = ClkTagBar;
             arg.ui = 1 << i;
-        } else if (ev->x < x + blw)
+        } else if (ev->x < x + TEXTW(selmon->ltsymbol))
             click = ClkLtSymbol;
         else if (ev->x > selmon->ww - (int)TEXTW(stext) - getsystraywidth() + lrpad - 2)
             click = ClkStatusText;
@@ -899,7 +899,7 @@ void drawbar(Monitor *m) {
         drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
         x += w;
     }
-    w = blw = TEXTW(m->ltsymbol);
+    w = TEXTW(m->ltsymbol);
     drw_setscheme(drw, scheme[SchemeNorm]);
     x = drw_text(drw, x, 0, w, bh, lrpad / 2, m->ltsymbol, 0);
 
@@ -1155,18 +1155,29 @@ void grabbuttons(Client *c, int focused) {
 void grabkeys(void) {
     updatenumlockmask();
     {
-        unsigned int i, j;
+        unsigned int i, j, k;
         unsigned int modifiers[] = {
             0, LockMask, numlockmask,
             numlockmask | LockMask
         };
-        KeyCode code;
+        int start, end, skip;
+        KeySym *syms;
 
         XUngrabKey(dpy, AnyKey, AnyModifier, root);
-        for (i = 0; i < LENGTH(keys); i++)
-            if ((code = XKeysymToKeycode(dpy, keys[i].keysym)))
-                for (j = 0; j < LENGTH(modifiers); j++)
-                    XGrabKey(dpy, code, keys[i].mod | modifiers[j], root, True, GrabModeAsync, GrabModeAsync);
+        XDisplayKeycodes(dpy, &start, &end);
+        syms = XGetKeyboardMapping(dpy, start, end - start + 1, &skip);
+        if (!syms)
+            return;
+        for (k = start; k <= end; k++)
+            for (i = 0; i < LENGTH(keys); i++)
+                /* skip modifier codes, we do that ourselves */
+                if (keys[i].keysym == syms[(k - start) * skip])
+                    for (j = 0; j < LENGTH(modifiers); j++)
+                        XGrabKey(dpy, k,
+                                 keys[i].mod | modifiers[j],
+                                 root, True,
+                                 GrabModeAsync, GrabModeAsync);
+        XFree(syms);
     }
 }
 
@@ -1257,13 +1268,12 @@ void manage(Window w, XWindowAttributes *wa) {
         applyrules(c);
     }
 
-    if (c->x + WIDTH(c) > c->mon->mx + c->mon->mw)
-        c->x = c->mon->mx + c->mon->mw - WIDTH(c);
-    if (c->y + HEIGHT(c) > c->mon->my + c->mon->mh)
-        c->y = c->mon->my + c->mon->mh - HEIGHT(c);
-    c->x = MAX(c->x, c->mon->mx);
-    /* only fix client y-offset, if the client center might cover the bar */
-    c->y = MAX(c->y, ((c->mon->by == c->mon->my) && (c->x + (c->w / 2) >= c->mon->wx) && (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
+    if (c->x + WIDTH(c) > c->mon->wx + c->mon->ww)
+        c->x = c->mon->wx + c->mon->ww - WIDTH(c);
+    if (c->y + HEIGHT(c) > c->mon->wy + c->mon->wh)
+        c->y = c->mon->wy + c->mon->wh - HEIGHT(c);
+    c->x = MAX(c->x, c->mon->wx);
+    c->y = MAX(c->y, c->mon->wy);
     c->bw = borderpx;
 
     wc.border_width = c->bw;

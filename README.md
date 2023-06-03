@@ -12,7 +12,7 @@
 
 安装 dwm 你需要 xorg-apps and xorg-server
 
-同时你还需要其他的一些东西, 比如 jemalloc
+同时你还需要其他的一些东西, 比如 mimalloc
 
 ## 安装
 

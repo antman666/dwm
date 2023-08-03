@@ -25,9 +25,9 @@ INCS = -I${X11INC} -I${FREETYPEINC}
 LIBS = -L${X11LIB} -lX11 ${XINERAMALIBS} ${FREETYPELIBS} -lXrender
 
 # flags
-CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=200809L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
-CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Ofast ${INCS} ${CPPFLAGS} -march=native -fomit-frame-pointer -fno-common -flto=auto
-LDFLAGS  = ${LIBS} -Wl,-Ofast,--sort-common,--as-needed,--strip-all,--hash-style=gnu,-ljemalloc
+CPPFLAGS = -D_DEFAULT_SOURCE -D_BSD_SOURCE -D_POSIX_C_SOURCE=700L -DVERSION=\"${VERSION}\" ${XINERAMAFLAGS}
+CFLAGS   = -std=c99 -pedantic -Wall -Wno-deprecated-declarations -Ofast ${INCS} ${CPPFLAGS} -march=native -fomit-frame-pointer -fno-common -fopenmp -flto=auto -fgraphite-identity -floop-nest-optimize -ftree-loop-distribution -floop-parallelize-all -ftree-parallelize-loops=2 -fdevirtualize-at-ltrans
+LDFLAGS  = ${LIBS} -Wl,-Ofast,--sort-common,--as-needed,--strip-all,--hash-style=gnu,-lmimalloc -march=native -fopenmp
 
 # Solaris
 #CFLAGS  = -fast ${INCS} -DVERSION=\"${VERSION}\"

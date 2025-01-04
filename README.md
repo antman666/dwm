@@ -1,5 +1,5 @@
 # Ant Man's DWM
-## 我已转用Hyperland，此仓库从此停更，之后的主线补丁将不会再合并进来
+## 我已转用[Hyperland](https://hyprland.org/)，此仓库从此停更，之后的主线补丁将不会再合并进来
 
 ![demo.png](https://raw.githubusercontent.com/antman666/dwm/master/demo.png)[国内地址](https://gitee.com/antman666/dwm)
 
